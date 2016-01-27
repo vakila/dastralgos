@@ -9,6 +9,17 @@ def selection_sort(my_list):
     - Swap that item with the second item in the array.
       The first and second items are now done being sorted.
     - Continue this way until the whole array has been sorted.
+
+    >>> print(selection_sort([4,2,1,6,3]))
+    [1, 2, 3, 4, 6]
+    >>> print(selection_sort([58940, -343, 1, 0, -34]))
+    [-343, -34, 0, 1, 58940]
+    >>> print(selection_sort([]))
+    []
+    >>> print(selection_sort([0]))
+    [0]
+    >>> print(selection_sort([1,2,3]))
+    [1, 2, 3]
     '''
     #print(my_list)
     for slot in range(len(my_list)-1):
@@ -24,8 +35,5 @@ def selection_sort(my_list):
 
 
 if __name__ == "__main__":
-    print(selection_sort([4,2,1,6,3]))
-    print(selection_sort([58940, -343, 1, 0, -34]))
-    print(selection_sort([]))
-    print(selection_sort([0]))
-    print(selection_sort([1,2,3]))
+    import doctest
+    doctest.testmod()
