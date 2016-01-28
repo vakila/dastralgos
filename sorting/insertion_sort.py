@@ -8,6 +8,8 @@ def insertion_sort(my_list):
     [1, 2, 3, 4, 5]
     >>> print(insertion_sort([2343, -43, 0, 1232, -586]))
     [-586, -43, 0, 1232, 2343]
+    >>> print(insertion_sort([2,3,2,1]))
+    [1, 2, 2, 3]
     >>> print(insertion_sort([1,2,3]))
     [1, 2, 3]
     >>> print(insertion_sort([1]))
@@ -27,8 +29,7 @@ def insertion_sort(my_list):
                 break
             else:
                 # print("item is smaller, moving left")
-                my_list.remove(item)
-                my_list.insert(p, item)
+                my_list[p], my_list[p+1] = item, previous
                 # print(my_list)
     return my_list
 
