@@ -1,8 +1,20 @@
 ### Insertion sort in Python 3
 
+# Performance:
+# Best case (input list is sorted): O(n)
+# Average case (input is shuffled): O(n^2)
+# Worst case (input is in reverse order): O(n^2)
+
 def insertion_sort(my_list):
     '''Returns the sorted list (ascending) using this algorithm:
-    #TODO
+    Look at the second item in the list.
+    Compare it to its neighbor on the left;
+        if the item is smaller than the neighbor, swap them.
+    Continue comparing with leftmost neighbors until either:
+        - the item is larger than the left neighbor
+        - you've reached the beginning of the list.
+    Continue with the next item in the list, until you reach the end.
+    
 
     >>> print(insertion_sort([4,2,1,3,5]))
     [1, 2, 3, 4, 5]
