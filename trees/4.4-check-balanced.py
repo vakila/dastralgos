@@ -14,7 +14,9 @@ class BinaryTreeNode:
 
 
 def check_balanced_with_depth(root_node, depth=0):
+    print("-"*depth, "ENTERING SUBTREE", "root:", root_node, "depth:", depth )
     if root_node.is_leaf():
+        print("-"*depth, "LEAF")
         return (True, depth)
 
     children = {'left': root_node.left, 'right': root_node.right}
@@ -25,17 +27,19 @@ def check_balanced_with_depth(root_node, depth=0):
         if children[side] != None:
             balanced[side], depths[side] = check_balanced(children[side],
                                                           depth = depth + 1)
+            if balanced[side] == False:
+                print("-"*depth, "UNBALANCED SUBTREE", side)
+                return (False, depths[side])
         # else (children[side] == None) that side is balanced with depth 0
 
-
     tree_depth = max(depths.values()) + 1
-    if False in balanced.values():
-        return (False, tree_depth)
-    else: #both are balanced, check depths
-        # any major difference/advantage between the 2 lines below?
-        depth_diff = max(depths.values()) - min(depths.values())
-        # depth_diff = abs(depths['left'] - depths['right'])
-        return (depth_diff <= 1, tree_depth)
+
+    # any major difference/advantage between the 2 lines below?
+    depth_diff = max(depths.values()) - min(depths.values())
+    # depth_diff = abs(depths['left'] - depths['right'])
+
+    print("-"*depth, "SUBTREE", root_node, "BALANCED?", depth_diff <= 1 )
+    return (depth_diff <= 1, tree_depth)
 
 
 def check_balanced(root_node):
@@ -65,32 +69,32 @@ if __name__ == "__main__":
     a.left = b
     a.right = c
 
-    # Balanced tree B
-    a.left = b
-
-    # Balanced tree C
-    a.left = b
-    b.left = c
-    b.right = d
-    a.right = e
-
-    # Unbalanced tree D
-    a.left = b
-    a.right = c
-    c.left = d
-    c.right = e
-    e.right = f
-
-    # Balanced tree E
-    a.left = b
-    b.left = c
-    a.right = d
-    d.right = e
-
-    # Unbalanced tree F
-    a.left = b
-    a.right = c
-    c.right = d
-    d.right = e
+    # # Balanced tree B
+    # a.left = b
+    #
+    # # Balanced tree C
+    # a.left = b
+    # b.left = c
+    # b.right = d
+    # a.right = e
+    #
+    # # Unbalanced tree D
+    # a.left = b
+    # a.right = c
+    # c.left = d
+    # c.right = e
+    # e.right = f
+    #
+    # # Balanced tree E
+    # a.left = b
+    # b.left = c
+    # a.right = d
+    # d.right = e
+    #
+    # # Unbalanced tree F
+    # a.left = b
+    # a.right = c
+    # c.right = d
+    # d.right = e
 
     print(check_balanced(a))
