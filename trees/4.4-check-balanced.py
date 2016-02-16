@@ -50,3 +50,46 @@ def check_balanced_alt(root_node):
     # if the difference is too big, return False
     # else, if the leaf's depth is greater than max, set as new max
     # if you finish traversing without returning False, return True
+
+if __name__ == "__main__":
+
+    a = BinaryTreeNode('a')
+    b = BinaryTreeNode('b')
+    c = BinaryTreeNode('c')
+    d = BinaryTreeNode('d')
+    e = BinaryTreeNode('e')
+
+
+    # Balanced tree A
+    a.left = b
+    a.right = c
+
+    # Balanced tree B
+    a.left = b
+
+    # Balanced tree C
+    a.left = b
+    b.left = c
+    b.right = d
+    a.right = e
+
+    # Unbalanced tree D
+    a.left = b
+    a.right = c
+    c.left = d
+    c.right = e
+    e.right = f
+
+    # Balanced tree E
+    a.left = b
+    b.left = c
+    a.right = d
+    d.right = e
+
+    # Unbalanced tree F
+    a.left = b
+    a.right = c
+    c.right = d
+    d.right = e
+
+    print(check_balanced(a))
