@@ -11,23 +11,25 @@ class BinaryTreeNode:
     def is_leaf(self):
         return self.left == None and self.right == None
 
+    def __str__(self):
+        return self.val
 
 
-def check_balanced_with_depth(root_node, depth=0):
-    print("-"*depth, "ENTERING TREE", "root:", root_node.val, "depth:", depth )
-    if root_node.is_leaf():
-        print(" "*depth, "LEAF")
-        return (True, depth)
+def balanced_with_depth(root_node, depth=0):
+    print("TREE", "root:", root_node, "depth:", depth)
 
     children = {'left': root_node.left, 'right': root_node.right}
-    balanced = {'left': True, 'right': True}
     depths = {'left': depth, 'right': depth}
 
     for side in ["left", "right"]:
-        if children[side] != None:
-            balanced[side], depths[side] = check_balanced_with_depth(
-                                              children[side], depth = depth + 1)
-            if balanced[side] == False:
+        print("-"*(depth+1), side.upper(), end=" ")
+        if children[side] == None:
+            print("EMPTY CHILD")
+            depths[side] = depth
+        else:
+            balanced, depths[side] = balanced_with_depth(children[side],
+                                                         depth = depth + 1)
+            if balanced == False:
                 print(" "*depth, "UNBALANCED subtree", side)
                 return (False, depths[side])
         # else (children[side] == None) that side is balanced with depth 'depth'
@@ -38,19 +40,16 @@ def check_balanced_with_depth(root_node, depth=0):
     depth_diff = max(depths.values()) - min(depths.values())
     # depth_diff = abs(depths['left'] - depths['right'])
 
-    print("-"*depth, "TREE", root_node.val, "BALANCED?", depth_diff <= 1, "(depths:", depths, ")")
+    print("-"*depth, "TREE", root_node, "BALANCED?", depth_diff <= 1, "(depths:", depths, ")")
     return (depth_diff <= 1, tree_depth)
 
-
 def check_balanced(root_node):
-    answer, depth = check_balanced_with_depth(root_node)
+    answer, depth = balanced_with_depth(root_node)
     print("\nROOT:", root_node.val, "DEPTH:", depth, "BALANCED?", answer)
     return answer
 
 def check_balanced_alt(root_node):
     max_depth = 0
-
-
     # traverse the tree until hitting a leaf
     # compare its depth to max depth
     # if the difference is too big, return False
