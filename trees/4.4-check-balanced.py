@@ -65,33 +65,35 @@ if __name__ == "__main__":
     e = BinaryTreeNode('e')
     f = BinaryTreeNode('f')
 
-    # # Balanced tree A
+    '''Uncomment one of the tree definitions below to test that tree'''
+
+    # print("Testing Tree A: Balanced")
     # a.left = b
     # a.right = c
 
-    # # Balanced tree B
+    # print("Testing Tree B: Balanced")
     # a.left = b
 
-    # # Balanced tree C
+    # print("Testing Tree C: Balanced")
     # a.left = b
     # b.left = c
     # b.right = d
     # a.right = e
 
-    # # Unbalanced tree D
+    # print("Testing Tree D: Unbalanced")
     # a.left = b
     # a.right = c
     # c.left = d
     # c.right = e
     # e.right = f
 
-    # # Balanced tree E
+    # print("Testing Tree E: Balanced")
     # a.left = b
     # b.left = c
     # a.right = d
     # d.right = e
 
-    # Unbalanced tree F
+    print("Testing Tree F: Unbalanced")
     a.left = b
     a.right = c
     c.right = d
