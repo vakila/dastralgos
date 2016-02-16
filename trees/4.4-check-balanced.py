@@ -14,37 +14,38 @@ class BinaryTreeNode:
 
 
 def check_balanced_with_depth(root_node, depth=0):
-    print("-"*depth, "ENTERING SUBTREE", "root:", root_node, "depth:", depth )
+    print("-"*depth, "ENTERING TREE", "root:", root_node.val, "depth:", depth )
     if root_node.is_leaf():
-        print("-"*depth, "LEAF")
+        print(" "*depth, "LEAF")
         return (True, depth)
 
     children = {'left': root_node.left, 'right': root_node.right}
     balanced = {'left': True, 'right': True}
-    depths = {'left': 0, 'right': 0}
+    depths = {'left': depth, 'right': depth}
 
     for side in ["left", "right"]:
         if children[side] != None:
-            balanced[side], depths[side] = check_balanced(children[side],
-                                                          depth = depth + 1)
+            balanced[side], depths[side] = check_balanced_with_depth(
+                                              children[side], depth = depth + 1)
             if balanced[side] == False:
-                print("-"*depth, "UNBALANCED SUBTREE", side)
+                print(" "*depth, "UNBALANCED subtree", side)
                 return (False, depths[side])
-        # else (children[side] == None) that side is balanced with depth 0
+        # else (children[side] == None) that side is balanced with depth 'depth'
 
-    tree_depth = max(depths.values()) + 1
+    tree_depth = max(depths.values())
 
     # any major difference/advantage between the 2 lines below?
     depth_diff = max(depths.values()) - min(depths.values())
     # depth_diff = abs(depths['left'] - depths['right'])
 
-    print("-"*depth, "SUBTREE", root_node, "BALANCED?", depth_diff <= 1 )
+    print("-"*depth, "TREE", root_node.val, "BALANCED?", depth_diff <= 1, "(depths:", depths, ")")
     return (depth_diff <= 1, tree_depth)
 
 
 def check_balanced(root_node):
-    return check_balanced_with_depth(root_node)[0]
-
+    answer, depth = check_balanced_with_depth(root_node)
+    print("\nROOT:", root_node.val, "DEPTH:", depth, "BALANCED?", answer)
+    return answer
 
 def check_balanced_alt(root_node):
     max_depth = 0
@@ -63,38 +64,38 @@ if __name__ == "__main__":
     c = BinaryTreeNode('c')
     d = BinaryTreeNode('d')
     e = BinaryTreeNode('e')
+    f = BinaryTreeNode('f')
 
-
-    # Balanced tree A
-    a.left = b
-    a.right = c
+    # # Balanced tree A
+    # a.left = b
+    # a.right = c
 
     # # Balanced tree B
     # a.left = b
-    #
+
     # # Balanced tree C
     # a.left = b
     # b.left = c
     # b.right = d
     # a.right = e
-    #
+
     # # Unbalanced tree D
     # a.left = b
     # a.right = c
     # c.left = d
     # c.right = e
     # e.right = f
-    #
+
     # # Balanced tree E
     # a.left = b
     # b.left = c
     # a.right = d
     # d.right = e
-    #
-    # # Unbalanced tree F
-    # a.left = b
-    # a.right = c
-    # c.right = d
-    # d.right = e
+
+    # Unbalanced tree F
+    a.left = b
+    a.right = c
+    c.right = d
+    d.right = e
 
     print(check_balanced(a))
