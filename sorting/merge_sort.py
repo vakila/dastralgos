@@ -5,28 +5,33 @@
 
 def merge_sort(my_list):
     '''Returns the sorted list (ascending) using this algorithm:
-    If the list only has one element, return.
+    If the list only has one element, return the list itself.
     Otherwise, split the list into two halves.
     Recursively sort each half.
     Merge the two halves (now sorted) together, preserving the sort order.
-
     '''
     print("Sorting:", my_list)
     if len(my_list) <= 1:
+        # If the list only has one element, return the list itself.
         return my_list
     else:
-        midpoint = int(len(my_list)/2)
+        # Split the list in half
+        midpoint = len(my_list)//2
+        # Recursivly sort each half
         left = merge_sort(my_list[:midpoint])
         right = merge_sort(my_list[midpoint:])
+        # Merge the halves together
         merged = merge_lists(left, right)
         print(merged)
         return merged
 
 def merge_lists(a, b):
-    '''Merges two sorted lists, preserving the sort order.
+    '''Merges two sorted lists, preserving the sort order,
+    by popping items from the start of the shorter list
+    and inserting them at the appropriate place in the longer list.
     '''
     print("Merging", a, "and", b)
-    longer, shorter = (a,b) if len(a) > len(b) else (b,a)
+    longer, shorter = (a, b) if len(a) > len(b) else (b, a)
     i = 0
     while len(shorter) > 0:
         if i == len(longer):
