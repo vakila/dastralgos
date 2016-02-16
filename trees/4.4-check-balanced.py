@@ -32,8 +32,9 @@ def check_balanced_with_depth(root_node, depth=0):
     if False in balanced.values():
         return (False, tree_depth)
     else: #both are balanced, check depths
+        # any major difference/advantage between the 2 lines below?
         depth_diff = max(depths.values()) - min(depths.values())
-        depth_diff = abs(depths['left'] - depths['right'])
+        # depth_diff = abs(depths['left'] - depths['right'])
         return (depth_diff <= 1, tree_depth)
 
 
