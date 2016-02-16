@@ -2,17 +2,7 @@
 # (height-)balanced, i.e. whether the difference in depth between any two leaves
 # is less than or equal to 1.
 
-class BinaryTreeNode:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
-
-    def is_leaf(self):
-        return self.left == None and self.right == None
-
-    def __str__(self):
-        return self.val
+from binary_tree import BinaryTreeNode
 
 
 def balanced_with_depth(root_node, depth=0):
@@ -58,45 +48,9 @@ def check_balanced_alt(root_node):
 
 if __name__ == "__main__":
 
-    a = BinaryTreeNode('a')
-    b = BinaryTreeNode('b')
-    c = BinaryTreeNode('c')
-    d = BinaryTreeNode('d')
-    e = BinaryTreeNode('e')
-    f = BinaryTreeNode('f')
+    from sample_trees import *
 
-    '''Uncomment one of the tree definitions below to test that tree'''
-
-    # print("Testing Tree A: Balanced")
-    # a.left = b
-    # a.right = c
-
-    # print("Testing Tree B: Balanced")
-    # a.left = b
-
-    # print("Testing Tree C: Balanced")
-    # a.left = b
-    # b.left = c
-    # b.right = d
-    # a.right = e
-
-    # print("Testing Tree D: Unbalanced")
-    # a.left = b
-    # a.right = c
-    # c.left = d
-    # c.right = e
-    # e.right = f
-
-    # print("Testing Tree E: Balanced")
-    # a.left = b
-    # b.left = c
-    # a.right = d
-    # d.right = e
-
-    print("Testing Tree F: Unbalanced")
-    a.left = b
-    a.right = c
-    c.right = d
-    d.right = e
-
-    print(check_balanced(a))
+    for sample in [tree_A, tree_B, tree_C, tree_D, tree_E, tree_F]:
+        print("\n" + "#"*10, sample.__name__, "#"*10)
+        balanced = check_balanced(sample())
+    
