@@ -5,7 +5,7 @@ class BinaryTreeNode:
         self.right = None
 
     def is_leaf(self):
-        return self.left == None and self.right == None
+        return self.left is None and self.right is None
 
     def __str__(self):
-        return self.val
+        return str(self.val)
