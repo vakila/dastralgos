@@ -29,14 +29,15 @@ def sort_and_count_invs(listy):
 
     if n < 2:
         print("Less than two items.")
-        merged =
+        merged = listy
         invs = 0
     elif n == 2:
         if listy[0] > listy[1]:
             # Put the two in the correct order
-            listy[0], listy[1] = listy[1], listy[0]
+            merged = listy[::-1]
             invs = 1
         else:
+            merged = listy
             invs = 0
     else:
         middle = len(listy)//2
@@ -44,13 +45,13 @@ def sort_and_count_invs(listy):
         right, r_invs = sort_and_count_invs(listy[middle:])
         merged, s_invs = merge_and_count_split_invs(left, right)
         invs = l_invs + r_invs + s_invs
-    print("Sorted:")
+    print("merged:", merged, "invs:", invs)
     return (merged, invs)
 
 
 def merge_and_count_split_invs(left, right):
     # assume left and right are independently sorted
-    print("\nMerging and counting:", left, right)
+    print("Merging and counting:", left, right)
     if left[0] > right[-1]:
         print("Two independent halves, wrong order")
         merged = right + left
@@ -94,15 +95,15 @@ def merge_and_count_split_invs(left, right):
 
 # Run simple tests
 if __name__ == "__main__":
-    assert(sort_and_count_invs([6, 5, 4, 3, 2, 1]) == 15)
-    assert(sort_and_count_invs([1, 2, 3]) == 0)
-    assert(sort_and_count_invs([1, 3, 2, 4, 5, 6]) == 1)
-    assert(sort_and_count_invs([1, 2, 3, 4, 6, 5]) == 1)
-    assert(sort_and_count_invs([1, 3, 2, 4, 6, 5]) == 2)
-    assert(sort_and_count_invs([1, 4, 6, 2, 3, 5]) == 5)
-    assert(sort_and_count_invs([5, 4, 3, 2, 1]) == 10)
-    assert(sort_and_count_invs([]) == 0)
-    assert(sort_and_count_invs([8, 7, 6, 5, 4, 3, 2, 1, 0]) == 28)
+    assert(sort_and_count_invs([6, 5, 4, 3, 2, 1])[1] == 15)
+    assert(sort_and_count_invs([1, 2, 3])[1] == 0)
+    assert(sort_and_count_invs([1, 3, 2, 4, 5, 6])[1] == 1)
+    assert(sort_and_count_invs([1, 2, 3, 4, 6, 5])[1] == 1)
+    assert(sort_and_count_invs([1, 3, 2, 4, 6, 5])[1] == 2)
+    assert(sort_and_count_invs([1, 4, 6, 2, 3, 5])[1] == 5)
+    assert(sort_and_count_invs([5, 4, 3, 2, 1])[1] == 10)
+    assert(sort_and_count_invs([])[1] == 0)
+    assert(sort_and_count_invs([8, 7, 6, 5, 4, 3, 2, 1, 0])[1] == 36)
 
     # assert(merge_and_count_split_invs([1, 2, 3], [4, 5, 6]) == ([1, 2, 3, 4, 5, 6], 0))
     # assert(merge_and_count_split_invs([2, 4, 6], [1, 3, 5]) == ([1, 2, 3, 4, 5, 6], 6))
